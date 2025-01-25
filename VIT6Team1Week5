@@ -1,0 +1,172 @@
+#Question1
+class Rectangle():  # Dikdortgen sinifi olusturuldu
+    def __init__(self, width, height):  # Dikdortgenin genisligi ve yuksekligini belirlemek icin
+        self.width = width  # genislik
+        self.height = height  # yukseklik
+
+    def area(self):  # Dikdortgenin alanini hesaplamak icin
+        return self.width * self.height  # Alan=genislik*yukseklik
+
+    def perimeter(self):  # Dikdortgenin cevresini hesaplamak icin
+        return 2 * (self.width + self.height)  # Cevre=2*(genislik+yukseklik)
+
+
+sonuc = Rectangle(5, 7)  #
+print("Alan:", sonuc.area())
+print("Cevre:", sonuc.perimeter())
+
+#Question2
+class School():  # Okul sinifi olsturulur
+    def __init__(self, name, foundation_year):  #Bu, sınıfın kurucusu (constructor) olarak adlandırılır,
+        self.name = name  #Okulun adi belirlendi
+        self.foundation_year = foundation_year  #Okulun kurulus yili belirlendi
+        self.students = []  #Ogrencilerin saklanacagi bos listesi olusturuldu ve sıralı verileri saklamak için kullanılır
+        self.teachers = []  #Ogretmenlerin saklanacagi bos sozluk olusturuldu ve anahtar-değer çiftlerini saklamak için kullanılır
+
+    def add_new_student(self, student_name, student_class):  #Ogrenci adi ve sinifi eklendi
+        self.students.append({'name': student_name, 'class': student_class})  #append() metoduyla Ogrenci adi ve sinifi eklendi
+        print(f"{student_name}, {student_class} sinifinana eklendi.")  #Eklenene bilgiler ekrana basilir.
+
+    def add_new_teacher(self, teacher_name, teacher_branch):  #Ogretmen adi ve dersi eklendi
+        data = {
+            "teacher_name": teacher_name,
+            "branch": teacher_branch
+        }
+        self.teachers.append(data)  #append() metoduyla Ogretmen adi ve dersi eklendi
+        print(f"{teacher_name}, {teacher_branch} dersine atandi.")  #Ogretmen adi ve dersi eklendi
+
+    def view_students(self):  #Ogrencileri gormek icin
+        print("Students:")  #Ogrencileri gormek icin
+        for student in self.students:  #Ogrencileri gormek icin
+            print(f"Student Name:{student['name']} \tClass : {student['class']}")  #Ogrencileri gormek icin
+
+    def view_teachers(self):  #Ogretmenleri gormek icin
+        print("Teachers:")
+        for teacher in self.teachers:  #sözlük items() ile elemanlara erişiliyor. teacher anahtarı, branch değerini temsil eder
+            print(f"Teacher Name : {teacher["teacher_name"]}  \tBranch : {teacher["branch"]}")
+
+school = School("Yamanlar Koleji", 1996)  #
+print(f"{school.name} isimli okul {school.foundation_year} yilinda kuruldu.")
+school.add_new_student("Iclal Ozturk", "10-A")  #Ogrenci adi ve sinifi eklendi
+school.add_new_student("Gurkan Ozturk", "11-B")  #Ogrenci adi ve sinifi eklendi
+school.add_new_student("Furkan Ozturk", "12-B")  #Ogrenci adi ve sinifi eklendi
+school.add_new_teacher("Sefa Ozturk", "Matematik")  #Ogretmen adi ve dersi eklendi
+school.add_new_teacher("Halime Ozturk", "Fizik")  #Ogretmen adi ve dersi eklendi
+print(school.students)
+print(school.teachers)
+school.view_students()  #Ogrencileri gormek icin
+school.view_teachers()  #Ogretmenleri gormek icin
+
+#Question3
+"""
+Question3: Create a "Shape" class. Under this class, create two subclasses, the "Rectangle" and "Square" classes.
+
+Let the "shape" class have two properties: "width" and "height."
+Let the "Rectangle" class inherit from the "Shape" class and add an additional "calculate_area()" method.
+Let the "Square" class inherit from the "Shape" class and calculate the area of ​​the square using the same "area_calculate()" method.
+Create a "Rectangle" and a "Square" instance, determine the width and height of each, and calculate the area of ​​each and print the results.
+"""
+class Shape:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    
+    def calculate_area(self):
+        return self.width * self.height
+
+class Rectangle(Shape):
+    shape_type = "rectangle"
+    
+    def __init__(self, width, height):
+        super().__init__(width, height)
+
+class Square(Shape):
+    shape_type = "square"
+    
+    def __init__(self, side):
+        super().__init__(side, side)
+
+# Create an instance of a Rectangle and a Square
+rectangle = Rectangle(30, 40)
+print("Rectangle Area:", rectangle.calculate_area())
+print("Shape type:", rectangle.shape_type)
+
+square = Square(20)
+print("Square Area:", square.calculate_area())
+print("Shape type:", square.shape_type)
+
+#Question4
+class Arac:
+    def __init__(self, marka, model, yil):
+        self.marka = marka
+        self.model = model
+        self.yil = yil
+
+class AraziAraci(Arac):
+    def __init__(self, marka, model, yil, dort_ceker):
+        super().__init__(marka, model, yil)
+        self.dort_ceker = dort_ceker
+
+class SporAraba(Arac):
+    def __init__(self, marka, model, yil, maksimum_hiz):
+        super().__init__(marka, model, yil)
+        self.maksimum_hiz = maksimum_hiz
+
+arazi_araci = AraziAraci("Toyota", "Land Cruiser", 2022, True)
+spor_araba = SporAraba("Ferrari", "488 GTB", 2023, 330)
+
+print("Arazi Aracı:")
+print(f"Marka: {arazi_araci.marka}")
+print(f"Model: {arazi_araci.model}")
+print(f"Yıl: {arazi_araci.yil}")
+print(f"Dört Çeker: {arazi_araci.dort_ceker}")
+
+print("\nSpor Araba:")
+print(f"Marka: {spor_araba.marka}")
+print(f"Model: {spor_araba.model}")
+print(f"Yıl: {spor_araba.yil}")
+print(f"Maksimum Hız: {spor_araba.maksimum_hiz} km/s")
+
+#Question5
+class Musteri:
+    def __init__(self, ad, soyad, tc_kimlik, telefon):
+        self.ad = ad
+        self.soyad = soyad
+        self.tc_kimlik = tc_kimlik
+        self.telefon = telefon
+
+    def bilgi_goruntule(self):
+        print(f"Müşteri Bilgileri:\nAd: {self.ad}\nSoyad: {self.soyad}\nTC Kimlik No: {self.tc_kimlik}\nTelefon: {self.telefon}")
+
+class Hesap:
+    def __init__(self, musteri, hesap_numarasi, bakiye):
+        self.musteri = musteri
+        self.hesap_numarasi = hesap_numarasi
+        self.bakiye = bakiye
+
+    def para_yatir(self, miktar):
+        self.bakiye += miktar
+        print(f"{miktar} TL yatırıldı. Güncel bakiye: {self.bakiye} TL")
+
+    def para_cek(self, miktar):
+        if miktar > self.bakiye:
+            print("Yetersiz bakiye. İşlem gerçekleştirilemedi.")
+        else:
+            self.bakiye -= miktar
+            print(f"{miktar} TL çekildi. Güncel bakiye: {self.bakiye} TL")
+
+    def bakiye_goruntule(self):
+        print(f"Hesap Bakiyesi: {self.bakiye} TL")
+
+musteri1 = Musteri("Ali", "Veli", "12345678901", "05551234567")
+hesap1 = Hesap(musteri1, "TR1234567890", 1000)
+
+musteri1.bilgi_goruntule()
+
+hesap1.bakiye_goruntule()
+hesap1.para_yatir(500)
+hesap1.para_cek(200)
+hesap1.para_cek(1500)
+
+    
+
